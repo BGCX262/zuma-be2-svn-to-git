@@ -1,0 +1,44 @@
+Pour le score :
+Fichier CSV-like 
+NOM | SCORE
+=================================================
+Pour les options :
+
+Liste des options possibles
+Son activé ou non (1 : oui/2 : non⁾
+"Palette graphique des boules" (1/2/3) --à chaque numéro correspond un thème différent
+Difficulté (1 facile /2 moyen /3 dur) 
+[Si tu en vois d'autres n'hésite pas]
+
+Il faudrait une structure option qu'on place dans game_data qui contiendrait les options du jeu style:
+option {int sound_enable;difficulty (avec un enum); int graphic_chosen}
+Fonctions classiques:
+création/destruction/accès aux membres
+==========================================
+Module pour les niveaux
+
+Les structures
+level {int size;point* points};
+point{int x,y;};
+
+Charger niveau
+level* load_level(const str* name);
+
+Sauvegarder niveau 
+void save_level(const str* name,level l);
+
+Détruire niveau
+void destroy_level(level* level)
+==============================
+"ANNEXE"
+Les images sont stockées dans
+./data/images/-1/balle1.png, 
+             /-2/...  
+             /-3/...
+             
+Les sons dans
+./data/sound/
+
+Les polices dans 
+./data/ttf/
+

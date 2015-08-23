@@ -1,0 +1,71 @@
+\section{Analyse préalable}
+Une bonne prise en main du sujet fût nécessaire au bon déroulement de la programmation, celle-ci permettant 
+de défénir des axes de travail pour gérer aux mieux le temps qui nous était imparti.
+\subsection{Rappel et analyse du sujet}
+
+Le jeu à réaliser était un "Zuma" : à l'aide d'un canneau à boules, le but du jeu est de détruire les boules d'un cortège 
+en mouvement en les rassemblant par couleurs. Si le cortège arrive à la fin du chemin, la partie est perdue.
+\subsubsection{Le Plateau}
+Le Plateau doit avoir une taille fixe de 800 par 600 pixels, ce qui n'est pas vraiment une contrainte car la modification des tailles de fenêtres peut être compliquée avec SDL. En revanche cela implique de trouver des fonds d'écran de cette taille si l'on veut éviter d'avoir à gérer des redimensionnements.
+
+\subsubsection{Les Niveaux}
+
+Un niveau est caractérisé par le nombre de boules dans le cortège, le chemin que suit ce dernier ainsi que le nombre de points du chemin.
+Le chemin est écrit dans un fichier texte, contenant des lignes de commentaires commençant par \#. Le but sera d'être capable de lire et stocker ce fichier tout en prenant garde d'éviter ces lignes commentées.
+
+\subsubsection{Les Boules}
+
+Nous disposons de 8 boules de couleurs différentes mesurant 32 pixels de diamètre.
+
+\subsubsection{Le Canon} 
+
+Le canon est au centre du plateau et pointe vers le curseur de la souris, sa mise à feu étant déclenchée par le click gauche.
+Il peut être modélisé par la boule prête à être tirée. Il nous faudra donc gérer l'avancement des boules et l'aléa lié au tirage de celles-ci.
+
+\subsubsection{Les Scores}
+
+Quand une partie est gagnée, le score est fonction du temps et du nombre de boules utilisées. Les meilleurs scores sont répertoriés par niveaux et la mémorisation doit être persistante au-delà de la durée de vie du programme. La solution serait donc de de créer un fichier score par niveau et ensuite de les sauver dedans. Au chargment de ce fichier, on pourrait effectuer un tri de ces tableaux.
+
+\subsubsection{Menus et informations}
+
+Au démarrage du jeu, l'interface invite le joueur à renseigner son nom.
+Ensuite, le menu doit proposer une liste de niveaux à jouer, de voir les meilleurs scores et de quitter.
+Pendant le jeu on doit voir : le numéro du niveau, le nom du joueurle temps écoulé depuis le début du niveau et le nombre de boules utilisés.
+On peut quitter le jeu avec la touche [Echap] pour revenir au menu.
+Il n'est pas nécesaire d'utiliser SDL pour charger ce menu, néanmois la souplesse de cette bibliothèque peut permettre de réaliser facilement ce genre de menu.
+
+\subsubsection{La dynamique}
+
+Que ce soit l'insertion ou la destruction de boules, celles-ci peuvent être gérées de façon continue ou non. C'est donc le temps dont nous disposions qui allait nous indiquer quelle voie suivre, en effet l'aspect dynamique de ce BE et la gestion d'événements que cela implique
+nous obligent d'abord à une bonne prise en main de SDL. 
+
+
+\subsection{Définition de nos objectifs} 
+SDL étant une bibliothèque relativement facile d'accès, nous envisagions d'utiliser ses capacités aussi souvent que possible.
+
+\subsubsection{Le Plateau}
+
+Nous envisageons de charger une image pour le plateau ainsi que pour les différents écrans de jeu, à savoir, l'accueil, le menu, les options, les scores ainsi que l'éditeur de niveau, manière à le rendre plus visuel.
+
+\subsubsection{Les Niveaux}
+
+Nous allons nous baser sur les niveaux fournis mais nous envisageons de créer un editeur de niveau permettant à l'utilisateur de créér un niveau dans un fichier texte, qu'il n'aura plus qu'à numéroter et placer dans le dossier prévu à cet effet.
+De plus le joueur aura la possibilité de modifier la difficulté des niveaux, celle-ci étant fonction du nombre de boules et de couleurs présentes dans le cortège.
+
+\subsubsection{Les Boules}
+
+Nous souhaiterions laisser la possibilité au joueur de choisir entre 3 types de boules associés à des thèmes différents que nous définirons par la suite.
+
+\subsubsection{Les Scores}
+
+Nous envisageons de comptabiliser les scores par difficulté, le score étant la somme cumulée sur les différents parcours effectués. De plus 
+des titres seront attribués en fonction des scores obtenus.
+
+\subsubsection{Menus et informations}
+
+L'écran de menu proposera des liens vers le jeu, les scores, les options et l'éditeur de niveau au moyen d'un click. Le joueur aura la possibilié du quitter le jeu à partir de ce menu.
+
+\subsubsection{Les Options}
+
+L'écran d'option devra gérer la présence du son, le thème des boules ainsi que la difficulté. Nous utiliserons quelques effets visuels afin de savoir quelles options sont enclenchées.
+

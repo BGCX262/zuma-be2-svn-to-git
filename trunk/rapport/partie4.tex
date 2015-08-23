@@ -1,0 +1,49 @@
+\section{Programme terminé : bugs et améliorations possibles}
+
+Un programme terminé n'existe pas vraiment, il subsiste toujours des petits bugs ou défauts et des aspects du programme que l'on aimerait améliorer. C'est pourquoi, dès lors qu'une deadline est imposée comme ce fût le cas lors pour ce BE, il convient de savoir s'arrêter pour assurer un programme fonctionnel, quitte à ne pas avoir le temps de mettre en place les multiples idées que l'on a en tête.
+
+\subsection{Le son}
+
+Nous n'avons programmé qu'une seule piste, par crainte que toutes les machines ne puissent pas lire les sons que nous lancerions. De ce côté, une bonne idée d'amélioration pourrait être d'obtenir des pistes au format .ogg, souvent plus lisible par les versons de SDL Mixer. Nous aurions pu ainsi programmer des pistes jouées aléatoirement, des pistes par écran de jeu ou encores des musiques variant suivant les difficultés rencontrées par le joueur à finir son niveau.
+\\Nous aurions aussi pu insérer quelques bruits courts relatifs aux clicks ou même au lancée et à la collision des boules.
+
+\subsection{Les graphismes}
+Des effets visuels pourraient être ajoutés, notamment dans les menus, comme la surbrilance du texte au moment où la souris passe dessus.
+Pendant le jeu, il aurait été possible d'ajouter un canon animé, des animations lors des destructions de boules mais aussi un fond d'écran un peu animé.
+
+\subsection{L'éditeur de niveau}
+
+Dans l'état actuel, l'éditeur crée un chemin de pixels que les boules peuvent utiliser. Néanmoins il ne tient pas compte du fait que, selon la pente du chemin, la distance entre 32 pixels (diamètre d'une boule) ne sera pas la même selon que l'on se trouve à l'horizontale ou en diagonale. Même si l'édicteur actuel est très fonctionnel et que les problèmes d'écart entre les boules sont minimes, avec plus de temps, il aurait été astucieux de tenir compte du coefficient directeur des segments de chemin, de manière à savoir ajuster la répartition des points.
+\subsection{Utilisation des timers}
+Nous avons découvert (trop tardivement pour corriger structurellement le
+problème malheureusement) que les timers de la SDL peuvent tourner
+dans un thread séparé du thread principal et qu'en conséquence, il est
+déconseillé de modifier les données directement. Ce problème explique
+un certain nombre d'erreurs aléatoires que nous avons rencontré et que
+nous n'avions pas pû expliquer.
+
+Nous avons essayé de synchroniser les différentes fonctions à l'aide des
+mutex fournis par la SDL, sans savoir si ce que nous faisons est
+vraiment efficace. Il semblerait néanmoins qu'on ait observé une
+diminution des problèmes aléatoires rencontrés jusque là.
+\subsection{le jeu}
+Concernant le jeu, des améliorations auraient aussi pu être envisageables.
+
+\subsubsection{Les boules}
+Avec plus de temps nous aurions pu ajouter des boules "spéciales" notamment :
+\begin{itemize}
+  \item La boule magique : Prend la couleur de la boule qu'elle touche. 
+  \item La boule explosive : Détruit plusieurs boules autour de soint point d'impact.
+  \item La boule de ralentissement : ralentit le cortége.
+  \item La boule chercheuse : s'insère à un endroit optimal sans que le joueur n'ait à viser.
+\end{itemize} 
+
+\subsubsection{Le chemin}
+Nous aurions pu créer des niveaux à plusieurs chemins suivis par les boules, voire même rajouter des canons à plusieurs endroits du cortège et donner la possibilité au joueur de les déplacer. 
+
+\subsubsection{Gestion des discontinuités}
+Il arrive que lors d'une partie, les différentes parties du cortège ne
+se raccordent pas correctement, rendant ainsi la partie injouable.
+
+\subsection{Architecture globale}
+Comme nous l'avons vu, le système de timer peut poser des problèmes, il n'est pas des plus adaptés pour modifier des données à intervalles réguliers. Il faudrait le remplacer par un autre mécanisme à définir. De même, le système de double boucle d'événement n'est pas optimal car il consomme inutilement un nombre important d'événements significatifs.

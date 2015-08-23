@@ -1,0 +1,4 @@
+Sound=1
+Graphic_chosen=1
+Difficulty=0
+
